@@ -5,7 +5,7 @@ package com.example.videodemo.codec;
  * Email: zhaoqirong96@gmail.com
  * Describe:
  */
-interface IDecoderStateListener {
+public interface IDecoderStateListener {
     void decoderPrepare(BaseDecoder decoder);
 
 

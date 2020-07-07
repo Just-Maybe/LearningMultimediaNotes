@@ -98,13 +98,15 @@ public class MMExtractor {
         if (readSampleCount < 0) {
             return -1;
         }
+        //记录当前帧的时间戳
         mCurSampleTime = mExtractor.getSampleTime();
+        //进入下一帧
         mExtractor.advance();
         return readSampleCount;
     }
 
     /**
-     * 选择通道
+     * 选择通道（同时只选择一个音/视频通道）
      */
     private void selectSourceTrack() {
         if (mVideoTrack >= 0) {
@@ -128,7 +130,31 @@ public class MMExtractor {
     /**
      * 停止读取
      */
-    public void stop(){
-
+    public void stop() {
+        //4.释放提取器
+        mExtractor.release();
+        mExtractor = null;
     }
+
+    public int getAudioTrack() {
+        return mAudioTrack;
+    }
+
+    public int getVideoTrack() {
+        return mVideoTrack;
+    }
+
+    public void setStartPos(long pos) {
+        mStartPos = pos;
+    }
+
+    /**
+     * 获取当前帧时间
+     *
+     * @return
+     */
+    public long getCurrentTimestamp() {
+        return mCurSampleTime;
+    }
+
 }

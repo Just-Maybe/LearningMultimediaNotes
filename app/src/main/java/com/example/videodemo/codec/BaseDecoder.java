@@ -52,7 +52,7 @@ public abstract class BaseDecoder implements IDecoder {
 
     private DecodeState mState = DecodeState.STOP;
 
-    private IDecoderStateListener mStateListener;
+    protected IDecoderStateListener mStateListener;
 
     /**
      * 流数据是否结束
@@ -73,17 +73,20 @@ public abstract class BaseDecoder implements IDecoder {
 
     @Override
     public void pause() {
-
+        mState = DecodeState.DECODING;
     }
 
     @Override
     public void goOn() {
-
+        mState = DecodeState.DECODING;
+        notifyDecode();
     }
 
     @Override
     public void stop() {
-
+        mState = DecodeState.STOP;
+        mIsRunning = false;
+        notifyDecode();
     }
 
     @Override
@@ -103,22 +106,22 @@ public abstract class BaseDecoder implements IDecoder {
 
     @Override
     public void setStateListener(IDecoderStateListener listener) {
-
+        mStateListener = listener;
     }
 
     @Override
     public int getWidth() {
-        return 0;
+        return mVideoWidth;
     }
 
     @Override
     public int getHeight() {
-        return 0;
+        return mVideoHeight;
     }
 
     @Override
     public long getDuration() {
-        return 0;
+        return mDuration;
     }
 
     @Override
@@ -128,7 +131,7 @@ public abstract class BaseDecoder implements IDecoder {
 
     @Override
     public MediaFormat getMediaFormat() {
-        return null;
+        return mExtractor.getFormat();
     }
 
     @Override
@@ -138,7 +141,7 @@ public abstract class BaseDecoder implements IDecoder {
 
     @Override
     public String getFilePath() {
-        return null;
+        return mFilePath;
     }
 
     @Override
