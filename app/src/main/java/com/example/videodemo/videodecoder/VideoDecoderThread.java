@@ -104,9 +104,13 @@ public class VideoDecoderThread extends Thread {
                 break;
             }
         }
-        mDecoder.stop();
-        mDecoder.release();
-        mExtractor.release();
+        if (mDecoder != null) {
+            mDecoder.stop();
+            mDecoder.release();
+        }
+        if (mExtractor != null) {
+            mExtractor.release();
+        }
     }
 
     public void close() {
