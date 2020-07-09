@@ -58,10 +58,12 @@ public class AudioRecordActivity extends AppCompatActivity implements View.OnCli
      * 被用户拒绝的权限列表
      */
     private List<String> mPermissionList = new ArrayList<>();
-    private Button btnStartRecord, btnStopRecord;
+    private static final String pcmFileName = Environment.getExternalStorageDirectory() + "/test.pcm";
+    private Button btnStartRecord, btnStopRecord;  //开始录音，结束录音
     private AudioRecord audioRecord;//声明AudioRecord对象
     private int recordBufSize = 0; //recordBuffer的大小
     private boolean isRecording;
+    private Button btnConvert;//音频格式转换
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -71,6 +73,8 @@ public class AudioRecordActivity extends AppCompatActivity implements View.OnCli
         btnStartRecord.setOnClickListener(this);
         btnStopRecord = findViewById(R.id.btn_stop_record);
         btnStopRecord.setOnClickListener(this);
+        btnConvert = findViewById(R.id.btn_convert);
+        btnConvert.setOnClickListener(this);
         checkPermissmions();
     }
 
@@ -109,6 +113,18 @@ public class AudioRecordActivity extends AppCompatActivity implements View.OnCli
             case R.id.btn_stop_record:
                 stopRecord();
                 break;
+            case R.id.btn_convert:
+                PcmToWaUtils pcmToWaUtils = new PcmToWaUtils(SAMPLE_RATE_INHZ, CHANNEL_CONFIG, AUDIO_FORMAT);
+                File pcmFile = new File(pcmFileName);
+                File wavFile = new File(Environment.getExternalStorageDirectory() + "/test.wav");
+                if (!wavFile.mkdirs()) {
+                    Log.e(TAG, "wavFile Directory not created");
+                }
+                if (wavFile.exists()) {
+                    wavFile.delete();
+                }
+                pcmToWaUtils.pcmToWav(pcmFile.getAbsolutePath(), wavFile.getAbsolutePath());
+                break;
         }
     }
 
@@ -117,7 +133,7 @@ public class AudioRecordActivity extends AppCompatActivity implements View.OnCli
         audioRecord = new AudioRecord(MediaRecorder.AudioSource.MIC, SAMPLE_RATE_INHZ, CHANNEL_CONFIG, AUDIO_FORMAT, minBufferSize);
 
         final byte data[] = new byte[minBufferSize];
-        final File file = new File(Environment.getExternalStorageDirectory() + "/test.pcm");
+        final File file = new File(pcmFileName);
         if (file.exists()) {
             file.delete();
         }
