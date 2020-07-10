@@ -25,7 +25,9 @@
         <activity android:name=".video_decoder.VideoDecoderActivity" />
         <activity android:name=".draw_picture.DrawPictureActivity" />
         <activity android:name=".audio_record_sample.AudioRecordActivity" />
-        <activity android:name=".camera.CameraActivity" />
+        <activity
+            android:name=".camera.CameraActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
