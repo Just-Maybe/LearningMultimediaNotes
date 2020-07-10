@@ -94,6 +94,11 @@ public class PcmToWaUtils {
         header[13] = 'm';
         header[14] = 't';
         header[15] = ' ';
+        //数据大小
+        header[16] = 16; // 4 bytes: size of 'fmt ' chunk
+        header[17] = 0;
+        header[18] = 0;
+        header[19] = 0;
         // format = 1
         header[20] = 1;
         header[21] = 0;
@@ -108,7 +113,7 @@ public class PcmToWaUtils {
         header[30] = (byte) ((byteRate >> 16) & 0xff);
         header[31] = (byte) ((byteRate >> 24) & 0xff);
         // block align
-        header[32] = (byte) (2 * 16 / 8);
+        header[32] = (byte) (channels * 16 / 8);
         header[33] = 0;
         // bits per sample
         header[34] = 16;
