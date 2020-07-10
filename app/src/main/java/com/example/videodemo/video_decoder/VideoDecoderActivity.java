@@ -1,14 +1,11 @@
-package com.example.videodemo.videodecoder;
+package com.example.videodemo.video_decoder;
 
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.videodemo.R;
 
 /**
  * Created by Miracle on 2020/7/8

@@ -1,4 +1,4 @@
-package com.example.videodemo.videodecoder;
+package com.example.videodemo.video_decoder;
 
 import android.media.MediaCodec;
 import android.media.MediaExtractor;

@@ -1,4 +1,4 @@
-package com.example.videodemo.AudioRecordSample;
+package com.example.videodemo.audio_record_sample;
 
 import android.media.AudioFormat;
 import android.media.AudioRecord;
@@ -7,7 +7,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 
 /**
  * Created by Miracle on 2020/7/9

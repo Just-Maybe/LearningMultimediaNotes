@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -21,9 +22,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".videodecoder.VideoDecoderActivity" />
-        <activity android:name=".drawPicture.DrawPictureActivity" />
-        <activity android:name=".AudioRecordSample.AudioRecordActivity" />
+        <activity android:name=".video_decoder.VideoDecoderActivity" />
+        <activity android:name=".draw_picture.DrawPictureActivity" />
+        <activity android:name=".audio_record_sample.AudioRecordActivity" />
+        <activity android:name=".camera.CameraActivity" />
     </application>
 
 </manifest>

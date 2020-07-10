@@ -1,4 +1,4 @@
-package com.example.videodemo.AudioRecordSample;
+package com.example.videodemo.audio_record_sample;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -22,6 +22,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.example.videodemo.BasePermissionsActivity;
 import com.example.videodemo.R;
 
 import java.io.ByteArrayOutputStream;
@@ -38,7 +39,7 @@ import java.util.List;
  * Email: zhaoqirong96@gmail.com
  * Describe:
  */
-public class AudioRecordActivity extends AppCompatActivity implements View.OnClickListener {
+public class AudioRecordActivity extends BasePermissionsActivity implements View.OnClickListener {
     private static final String TAG = AudioRecordActivity.class.getSimpleName();
 
     /**
@@ -55,15 +56,8 @@ public class AudioRecordActivity extends AppCompatActivity implements View.OnCli
      * 返回的音频数据的格式。 ENCODING_PCM_8BIT, ENCODING_PCM_16BIT, and ENCODING_PCM_FLOAT.
      */
     private static final int AUDIO_FORMAT = AudioFormat.ENCODING_PCM_16BIT;
-    private static final int MY_PERMISSIONS_REQUEST = 1001;
-    private String[] permissions = new String[]{
-            Manifest.permission.RECORD_AUDIO,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
-    };
-    /**
-     * 被用户拒绝的权限列表
-     */
-    private List<String> mPermissionList = new ArrayList<>();
+
+
     private static final String pcmFileName = Environment.getExternalStorageDirectory() + "/test.pcm";
     private Button btnStartRecord, btnStopRecord;  //开始录音，结束录音
     private AudioRecord audioRecord;//声明AudioRecord对象
@@ -87,33 +81,11 @@ public class AudioRecordActivity extends AppCompatActivity implements View.OnCli
         btnPlay.setOnClickListener(this);
         btnStop = findViewById(R.id.btn_stop_play);
         btnStop.setOnClickListener(this);
-        checkPermissmions();
     }
 
-    private void checkPermissmions() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            for (int i = 0; i < permissions.length; i++) {
-                if (ContextCompat.checkSelfPermission(this, permissions[i]) != PackageManager.PERMISSION_GRANTED) {
-                    mPermissionList.add(permissions[i]);
-                }
-            }
-            if (!mPermissionList.isEmpty()) {
-                String[] permissions = mPermissionList.toArray(new String[mPermissionList.size()]);
-                ActivityCompat.requestPermissions(this, permissions, MY_PERMISSIONS_REQUEST);
-            }
-        }
-    }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == MY_PERMISSIONS_REQUEST) {
-            for (int i = 0; i < grantResults.length; i++) {
-                if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
-                    Log.e(TAG, permissions[i] + "权限被禁止");
-                }
-            }
-        }
-    }
+
+
 
 
     @Override

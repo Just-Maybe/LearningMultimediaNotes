@@ -1,4 +1,4 @@
-package com.example.videodemo.drawPicture;
+package com.example.videodemo.draw_picture;
 
 import android.content.Context;
 import android.graphics.Bitmap;
