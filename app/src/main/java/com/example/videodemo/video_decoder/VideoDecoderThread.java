@@ -47,7 +47,6 @@ public class VideoDecoderThread extends Thread {
     public void run() {
         MediaCodec.BufferInfo info = new MediaCodec.BufferInfo();
         ByteBuffer[] inputBuffers = mDecoder.getInputBuffers();
-        mDecoder.getOutputBuffers();
 
         boolean isInput = true;
         boolean first = false;
