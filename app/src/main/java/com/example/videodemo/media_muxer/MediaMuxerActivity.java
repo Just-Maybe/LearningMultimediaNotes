@@ -36,8 +36,9 @@ public class MediaMuxerActivity extends BasePermissionsActivity implements View.
     private void initView() {
         surfaceView = findViewById(R.id.surface_view);
         btnStart = findViewById(R.id.btn_start_muxer);
+        btnStart.setOnClickListener(this);
         btnStop = findViewById(R.id.btn_stop_muxer);
-
+        btnStop.setOnClickListener(this);
         surfaceHolder = surfaceView.getHolder();
         surfaceHolder.addCallback(this);
     }
@@ -47,8 +48,10 @@ public class MediaMuxerActivity extends BasePermissionsActivity implements View.
         switch (v.getId()) {
             case R.id.btn_start_muxer:
                 startCamera();
+                MediaMuxerThread.startMuxer();
                 break;
             case R.id.btn_stop_muxer:
+                MediaMuxerThread.stopMuxer();
                 stopCamera();
                 break;
         }
@@ -97,11 +100,11 @@ public class MediaMuxerActivity extends BasePermissionsActivity implements View.
 
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
-
+        MediaMuxerThread.stopMuxer();
     }
 
     @Override
     public void onPreviewFrame(byte[] data, Camera camera) {
-
+        MediaMuxerThread.addVideoFrameData(data);
     }
 }

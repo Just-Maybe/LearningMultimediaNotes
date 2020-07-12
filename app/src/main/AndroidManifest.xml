@@ -29,6 +29,7 @@
             android:name=".camera.CameraActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".media_muxer.H264Activity" />
+        <activity android:name=".media_muxer.MediaMuxerActivity"/>
     </application>
 
 </manifest>
