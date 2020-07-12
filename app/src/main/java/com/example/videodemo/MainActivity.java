@@ -13,6 +13,7 @@ import com.example.videodemo.home.Module;
 import com.example.videodemo.home.ModuleAdapter;
 import com.example.videodemo.media_muxer.H264Activity;
 import com.example.videodemo.media_muxer.MediaMuxerActivity;
+import com.example.videodemo.opengl_es.OpenGLES20Activity;
 import com.example.videodemo.video_decoder.VideoDecoderActivity;
 
 import java.util.ArrayList;
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         dataList.add(new Module("使用 Camera API 采集视频数据", CameraActivity.class));
 //        dataList.add(new Module("收集Camera数据，并转码为H264存储到文件", H264Activity.class));
 //        dataList.add(new Module("音视频采集+混合，存储到文件", MediaMuxerActivity.class));
+        dataList.add(new Module("OpenGL ES 环境搭建", OpenGLES20Activity.class));
 
         adapter.update(dataList);
     }
